@@ -51,7 +51,7 @@ export const CustomerStatusbar = (props) => {
             <stylCls.CustStatusMain>
                 <React.Fragment>
                     <div>
-                        You Got <span> <i class="rupee sign icon"></i>{totalYouGot()}</span>
+                        You Go <span> <i class="rupee sign icon"></i>{totalYouGot()}</span>
                     </div>
                     <div>
                         You Gave <span> <i class="rupee sign icon"></i>{totalYouGave()}</span>
