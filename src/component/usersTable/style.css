@@ -1,0 +1,34 @@
+.cust-mrgn-tp{
+    margin-top: 120px;
+    margin-left: 40px;
+    margin-right: 40px;
+    box-shadow: 0px 2px 16px 7px rgba(0,0,0,.1);
+    border-radius: 10px;
+}
+.cust-mrgn-tp table{
+    border-radius: 5px!important;
+    border-bottom: .15em solid #21ba45!important;
+}
+
+.iconsManDiv{
+    display: flex;
+    justify-content: space-between;
+}
+
+.iconsManDiv div{
+    cursor: pointer;
+    padding: 2px;
+    font-size: 17px;
+}
+
+.iconsManDiv div i.edit{
+    color: #21ba45;
+}
+
+.iconsManDiv div i.trash{
+    color: #db2828;
+}
+
+.iconsManDiv div i.folder{
+    color: #fbbd08;
+}
