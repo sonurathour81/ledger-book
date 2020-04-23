@@ -124,6 +124,25 @@ export function* deleteCustomer(data){
         })
         // Delete customer items of this id end
 
+        // Delete customer Money of this id start
+        const allMoney = yield call(getCustomerAmount)
+
+        const getCustDataMoney =  _.map(allMoney,(val,key)=>{
+            return {...val, customerMoneyId:key}
+        })
+
+        const filteredMoney = getCustDataMoney.filter((val) => {
+            if(val.customerId === data.payload.deleteId){
+                return val
+            }
+        })
+
+        filteredMoney && filteredMoney.map((val) => {
+            const useRef = configDatabase.database().ref(`/customersMoney/${val.customerMoneyId}`);
+            return useRef.remove();
+        })
+        // Delete customer Money of this id end
+
         yield put(fun.deleteCustomerSuccess(logedCustData))
     } catch(error) {
         yield put(fun.deleteCustomerError(error))

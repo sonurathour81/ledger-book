@@ -23,7 +23,7 @@ export const CustomerHeader = (props) => {
                             props.customerHistory &&
                             <div>
                                 <Link to='/userAccount' onClick={deleteGrandTotal}>
-                                    <i class="plus square outline icon"></i> Add More Items
+                                    <i class="plus square outline icon"></i> Add More Items / Pay
                                 </Link>
                             </div>
                         }
@@ -51,7 +51,7 @@ export const CustomerHeader = (props) => {
                             props.customerAddPay && 
                             <div>
                                 <Link to={`/userAccount/${clickedUserData.customerId}`}>
-                                    <i class="folder open outline icon"></i> Go On Account
+                                    <i class="folder open outline icon"></i> History
                                 </Link>
                             </div>
                         }

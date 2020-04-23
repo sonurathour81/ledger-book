@@ -48,10 +48,23 @@ export const CustomerStatusbar = (props) => {
 
     return(
         <div>
-            <stylCls.CustStatusMain>
+            <stylCls.CustStatusMain
+                fixedStatus = {props.fixedStatus}
+            >
                 <React.Fragment>
                     <div>
-                        You Got <span> <i class="rupee sign icon"></i>{totalYouGot()}</span>
+                        {
+                            (props.usersLength || props.usersLength === 0) && 
+                                <React.Fragment>
+                                    {props.usersLength === 0 || props.usersLength === 1 ? "Total Customer" : "Total Customers"} <span>{props.usersLength}</span>
+                                </React.Fragment>
+                        }
+                        {
+                            (!props.usersLength && props.usersLength !== 0) &&
+                                <React.Fragment>
+                                    You Got <span> <i class="rupee sign icon"></i>{totalYouGot()}</span>
+                                </React.Fragment>
+                        }
                     </div>
                     <div>
                         You Gave <span> <i class="rupee sign icon"></i>{totalYouGave()}</span>

@@ -9,6 +9,14 @@ export const CustStatusMain = styled.div`
     color: black;
     box-shadow: 0px 0px 8px 3px rgba(0,0,0,.1);
 
+    ${({fixedStatus}) => fixedStatus && css`
+        position: fixed!important;
+        width: 98%!important;
+        left: 20px!important;
+        right: 20px!important;
+        margin: 0px!important;
+    `}
+
     div:nth-child(1){
         color: #565656;
         span{
