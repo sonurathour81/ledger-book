@@ -12,7 +12,9 @@ export const SelectedUserAccount = () => {
                 <CustomerHeader 
                     customerHistory
                 />
-                <CustomerStatusbar />
+                <CustomerStatusbar 
+                    customerAccount
+                />
                 <AddPayTabs
                     customerHistory
                     title1 = "You Gave" 

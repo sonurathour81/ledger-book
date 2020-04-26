@@ -46,6 +46,7 @@ export const MianDivButton = styled.div`
         padding: 14px!important;
         font-size: 13px!important;
         border-radius: 0px!important;
+        background: #e62323!important;
     }
     
 `
@@ -54,18 +55,19 @@ export const CustTable = styled.div`
     padding: 20px;
     box-shadow: 0px 2px 10px 3px rgba(0,0,0,.1);
     margin-top: 20px;
-    h4{
-        text-align: center;
-        margin-bottom: 20px;
-        text-decoration: underline;
-        color: #21ba45;
+    div{
+        color: #565656;
+        line-height: 1;
+        font-size: 16px;
+        font-weight: 400;
         span{
-            float: left;
-            text-decoration: underline;
+            color: #e62323;
         }
     }
     table{
-        border-bottom: .15em solid #21ba45!important;
+        border-top: 1px solid #e62323!important;
+        border-bottom: 1px solid #e62323!important;
+        border-radius: 0px!important;
         td{
             text-transform: uppercase;
             padding: 10px!important;
@@ -74,12 +76,17 @@ export const CustTable = styled.div`
         i.rupee{
            color: #525252;
         }
+        i.trash{
+            color: #e62323;
+        }
     }
 `
 
 export const TotalTr = styled.tr`
     td{
-        border-top: 2px solid #21ba45!important;
         font-weight: 900;
+        button{
+             background: #e62323!important;
+        }
     }
 `

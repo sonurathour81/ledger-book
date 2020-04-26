@@ -45,53 +45,70 @@ export const CustomerStatusbar = (props) => {
         return parseFloat(youGotTotal).toFixed(2)
     }
 
+    const finalRes = () => {
+        if(youGavetotal === youGotTotal){
+            return(
+                <stylCls.FinallyRes settled>
+                    Settled Up <span> <i class="rupee sign icon"></i> {(parseFloat(youGavetotal) - parseFloat(youGotTotal)).toFixed(2)}</span>
+                </stylCls.FinallyRes>
+            )
+        }
+
+        if(youGavetotal > youGotTotal){
+            return(
+                <stylCls.FinallyRes youget>
+                    You will get <span> <i class="rupee sign icon"></i> {(parseFloat(youGavetotal) - parseFloat(youGotTotal)).toFixed(2)}</span>
+                </stylCls.FinallyRes>
+            )
+        }
+
+        if(youGavetotal < youGotTotal){
+            return(
+                <stylCls.FinallyRes yougive>
+                    You will give <span> <i class="rupee sign icon"></i> {(parseFloat(youGotTotal) - parseFloat(youGavetotal)).toFixed(2)}</span>
+                </stylCls.FinallyRes>
+            )
+        }
+    }
+
+
+    const searchSubmit = (e) => {
+        e.preventDefault();
+        dispatch(fun.searchText(e.target.value))
+    }
 
     return(
         <div>
             <stylCls.CustStatusMain
                 fixedStatus = {props.fixedStatus}
             >
-                <React.Fragment>
-                    <div>
-                        {
-                            (props.usersLength || props.usersLength === 0) && 
-                                <React.Fragment>
-                                    {props.usersLength === 0 || props.usersLength === 1 ? "Total Customer" : "Total Customers"} <span>{props.usersLength}</span>
-                                </React.Fragment>
-                        }
-                        {
-                            (!props.usersLength && props.usersLength !== 0) &&
-                                <React.Fragment>
-                                    You Got <span> <i class="rupee sign icon"></i>{totalYouGot()}</span>
-                                </React.Fragment>
-                        }
-                    </div>
-                    <div>
-                        You Gave <span> <i class="rupee sign icon"></i>{totalYouGave()}</span>
-                    </div>
-                        {
-                            youGavetotal === youGotTotal && (
-                                <stylCls.FinallyRes settled>
-                                    Settled Up <span> <i class="rupee sign icon"></i> {(parseFloat(youGavetotal) - parseFloat(youGotTotal)).toFixed(2)}</span>
-                                </stylCls.FinallyRes>
-                            )
-                        }
-                        {
-                            youGavetotal > youGotTotal && (
-                                <stylCls.FinallyRes youget>
-                                    You will get <span> <i class="rupee sign icon"></i> {(parseFloat(youGavetotal) - parseFloat(youGotTotal)).toFixed(2)}</span>
-                                </stylCls.FinallyRes>
+            {
+                props.customerAccount && 
+                    <React.Fragment>
+                        <div> You Got <span> <i class="rupee sign icon"></i>{totalYouGot()}</span></div>
+                        <div> You Gave <span> <i class="rupee sign icon"></i>{totalYouGave()}</span></div>
+                        {finalRes()}
+                    </React.Fragment>
+            }
 
-                            )
-                        }
-                        {
-                            youGavetotal < youGotTotal && (
-                                <stylCls.FinallyRes yougive>
-                                    You will give <span> <i class="rupee sign icon"></i> {(parseFloat(youGotTotal) - parseFloat(youGavetotal)).toFixed(2)}</span>
-                                </stylCls.FinallyRes>
-                            )
-                        }
-                </React.Fragment>
+            {
+                (props.usersLength || props.usersLength === 0) && 
+                    <React.Fragment>
+                        <stylCls.SrchMain>
+                            <div> {props.usersLength === 0 || props.usersLength === 1 ? "Total Customer" : "Total Customers"} <span>{props.usersLength}</span> </div>
+                                <div>
+                                    <form>
+                                        <stylCls.SearchInput
+                                            type="text"
+                                            placeholder="Search with Name or Email"
+                                            onChange= {(e) => searchSubmit(e)}
+                                        />
+                                        <i className="sistrix icon"></i>
+                                    </form>
+                                </div>
+                        </stylCls.SrchMain>
+                    </React.Fragment>
+            }
             </stylCls.CustStatusMain>   
         </div>
     )

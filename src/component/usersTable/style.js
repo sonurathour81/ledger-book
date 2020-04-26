@@ -6,7 +6,7 @@ export const MainUsersDiv = styled.div`
 export const MainUsersTable = styled.div`
     position: fixed;
     width: 100%;
-    top: 165px;
+    top: 175px;
 
     .cust-mrgn-tp{
         margin-left: 20px;
@@ -15,11 +15,23 @@ export const MainUsersTable = styled.div`
         padding: 20px;
     }
     .cust-mrgn-tp table{
-        border-bottom: 2px solid #21ba45!important;
-        border-top: 2px solid #21ba45!important;
+        border-bottom: 1px solid #21ba45!important;
+        border-top: 1px solid #21ba45!important;
         margin-bottom: 0px!important;
         border-radius: 0px!important;
+
+
+        tbody tr td{
+            padding-top: 13px!important;
+            align-items: center;
+            padding-bottom: 10px;
+        }
+        .action{
+            padding-top: 9px!important;
+            padding-bottom: 8px!important;
+        }
     }
+    
     .fullTr:hover{
         cursor: pointer;
         background: #f9fafb;
@@ -29,6 +41,7 @@ export const MainUsersTable = styled.div`
     .iconsManDiv{
         display: flex;
         justify-content: space-between;
+        align-items: center;
     }
 
     .iconsManDiv div{

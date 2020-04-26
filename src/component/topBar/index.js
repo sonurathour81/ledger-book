@@ -14,16 +14,39 @@ const TopbarMain = styled.div`
     right: 0;
     background: white;
     z-index: 99;
+    display: flex;
+
+    ul:nth-child(1){
+        width: 70%;
+    }
+    ul:nth-child(2){
+        width: 30%;
+        flex-direction: row-reverse;
+    }
 
     ul{
         display: flex;
         list-style: none;
         padding: 10px;
         margin-bottom: 0px;
+        li.logout{
+            color: #4e4e4e;
+            cursor: pointer;
+            &:hover{
+                color: #868686;
+            }
+        }
         li{
             padding: 7px 20px;
             font-size: 18px;
             color: black;
+            a{
+                text-decoration: none;
+                color: #4e4e4e;
+                &:hover{
+                    color: #868686;
+                }
+            }
         }
     }
 `
@@ -41,8 +64,8 @@ const TopBar = (props) => {
         localStorage.removeItem("Token");
         dispatch(fun.tokenLogin({"Token": false}))
         window.location.reload();
-        // return props.history.push('/');
-        return <Redirect path="/addUser" to="/" />
+        return props.history.push('/');
+        // return <Redirect path="/addUser" to="/" />
     }
 
     useEffect(()=>{
@@ -54,23 +77,32 @@ const TopBar = (props) => {
     return(
         <TopbarMain>
             <ul>
-                <li>
-                    <Link to="/">Home</Link>
-                </li>
+                <li><Link to="/">Home</Link></li>
                 {
-                    getToken ? <React.Fragment>
-                        <li><Link to="/addUser">Add User</Link></li>
-                        <li><Link to="/usersTable">Users</Link></li>
-                        <li onClick={logOutFun}>Logout</li>
-                    </React.Fragment> :
-                    <React.Fragment>
-                        <li>
-                            <Link to="/login">SignIn</Link>
-                        </li>
-                        <li>
-                            <Link to="/signup">SignUp</Link>
-                        </li>
-                    </React.Fragment>
+                    getToken &&
+                        <React.Fragment>
+                            <li><Link to="/addUser">Add User</Link></li>
+                            <li><Link to="/usersTable">Users</Link></li>
+                        </React.Fragment>
+                }
+            </ul>
+            <ul>
+                {
+                    getToken && 
+                        <React.Fragment>                            
+                            <li className="logout" onClick={logOutFun}>Logout</li>
+                        </React.Fragment>
+                }
+                {
+                    !getToken && 
+                        <React.Fragment>
+                            <li>
+                                <Link to="/signup">SignUp</Link>
+                            </li>
+                            <li>
+                                <Link to="/login">SignIn</Link>
+                            </li>
+                        </React.Fragment>
                 }
             </ul>
         </TopbarMain>

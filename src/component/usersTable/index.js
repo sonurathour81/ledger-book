@@ -58,12 +58,23 @@ const UsersTable = (props) => {
         localStorage.setItem("Clicked_User_Data", JSON.stringify(value))
     }
 
-    const objectLenght = Object.keys(mapState.customerData.customer).length;
+    const searchFun = () =>{
+       const temp =  _.map(mapState.customerData.customer, (val,idx)=>{
+            return val
+        })
+        const temp2 = temp.filter((val)=>{
+            const chk = val.cust_name.toLowerCase().startsWith(mapState.searchingText.searchText.toLowerCase()) ||
+                        val.cust_email.toLowerCase().startsWith(mapState.searchingText.searchText.toLowerCase())
+            return chk
+        })
+        return temp2
+
+    }
     return(
         <stylCls.MainUsersDiv>
             <CustomerStatusbar 
                 fixedStatus
-                usersLength = {objectLenght}
+                usersLength = {searchFun().length}
             />
             <stylCls.MainUsersTable>
                 <div className="cust-mrgn-tp">
@@ -80,7 +91,7 @@ const UsersTable = (props) => {
                         </thead>
                         <tbody>
                             {
-                                objectLenght > 0 ?  _.map(mapState.customerData.customer, (val,idx)=>{
+                                searchFun().length > 0 ?  searchFun().map((val,idx)=>{
                                     return(
                                         <tr key={idx} className="fullTr">                                
                                             <td>{Number(idx)+1}</td>
@@ -88,7 +99,7 @@ const UsersTable = (props) => {
                                             <td>{val.cust_email}</td>
                                             <td>{val.cust_phone}</td>
                                             <td>{val.cust_city}, {val.cust_street}, {val.cust_zip}</td>
-                                            <td>
+                                            <td className="action">
                                                 <div className="iconsManDiv">
                                                     <div onClick={(e)=>editBtn(e,val)}>
                                                         <i class="edit outline icon"></i> Edit

@@ -21,7 +21,9 @@ export const UserAccount = () => {
                 <CustomerHeader 
                     customerAddPay
                 />
-                <CustomerStatusbar />
+                <CustomerStatusbar 
+                    customerAccount
+                />
                 <AddPayTabs
                     customerAddPay
                     title1 = "Add Item" 

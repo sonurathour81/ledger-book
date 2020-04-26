@@ -183,10 +183,9 @@ export const UserAddItems = () => {
                 </form>
             </stylCls.MainDiv2>
             <stylCls.CustTable>                    
-                <h4>
-                    <span>Total Added Item {itemOfClickedCustomer.length} </span>
-                    Added Items
-                </h4>
+                <div>
+                    Added Items <span>{itemOfClickedCustomer.length}</span>
+                </div>
                 <table className="ui green table">
                     <thead>
                         <tr>
@@ -212,7 +211,7 @@ export const UserAddItems = () => {
                                         <td>
                                             <div className="iconsManDiv">
                                                 <div onClick={(e)=>deleteItem(e,idx)}>
-                                                    <i class="trash alternate outline icon"></i>
+                                                    <i className="trash alternate outline icon"></i>
                                                 </div>
                                             </div>
                                         </td>
@@ -226,7 +225,7 @@ export const UserAddItems = () => {
                                 <td></td>
                                 <td></td>
                                 <td></td>
-                                <td>Grand Total is:- </td>
+                                <td>Grand Total </td>
                                 <td>{grandTotal}<i class="rupee sign icon"></i></td>
                                 <td>
                                 <stylCls.MianDivButton>

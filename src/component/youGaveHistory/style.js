@@ -4,6 +4,9 @@ export const CustTable = styled.div`
     padding: 20px;
     box-shadow: 0px 2px 10px 3px rgba(0,0,0,.1);
     margin-top: 20px;
+    .ui.table{
+        border-radius: 0px!important;
+    }
     i.rupee{
            color: #525252;
     }

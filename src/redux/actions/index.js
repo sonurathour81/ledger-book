@@ -252,3 +252,10 @@ export const getMoneyError = (data) => {
         payload: data
     }
 }
+
+export const searchText = (data) => {
+    return{
+        type: act.SEARCH_TEXT,
+        payload: data
+    }
+}
