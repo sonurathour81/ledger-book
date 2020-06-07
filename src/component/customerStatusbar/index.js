@@ -2,6 +2,7 @@ import React,{useEffect,useState} from 'react'
 import * as stylCls from './style'
 import * as fun from '../../redux/actions/index'
 import { useSelector, useDispatch } from 'react-redux';
+import { CommanModal } from '../myModal/index'
 
 export const CustomerStatusbar = (props) => {
 
@@ -77,6 +78,16 @@ export const CustomerStatusbar = (props) => {
         dispatch(fun.searchText(e.target.value))
     }
 
+    const [showModal,setShowModal] = useState(false)
+
+    const openAddUserModal = () => {
+        setShowModal(true)
+    }
+
+    const hideModal = () => {
+        setShowModal(false)
+    }
+
     return(
         <div>
             <stylCls.CustStatusMain
@@ -95,21 +106,28 @@ export const CustomerStatusbar = (props) => {
                 (props.usersLength || props.usersLength === 0) && 
                     <React.Fragment>
                         <stylCls.SrchMain>
+                            <div onClick={openAddUserModal}><i className="plus square outline icon"></i> Add Customer</div>
                             <div> {props.usersLength === 0 || props.usersLength === 1 ? "Total Customer" : "Total Customers"} <span>{props.usersLength}</span> </div>
-                                <div>
-                                    <form>
-                                        <stylCls.SearchInput
-                                            type="text"
-                                            placeholder="Search with Name or Email"
-                                            onChange= {(e) => searchSubmit(e)}
-                                        />
-                                        <i className="sistrix icon"></i>
-                                    </form>
-                                </div>
+                            <div>
+                                <form>
+                                    <stylCls.SearchInput
+                                        type="text"
+                                        placeholder="Search with Name or Email"
+                                        onChange= {(e) => searchSubmit(e)}
+                                    />
+                                    <i className="sistrix icon"></i>
+                                </form>
+                            </div>
                         </stylCls.SrchMain>
                     </React.Fragment>
             }
-            </stylCls.CustStatusMain>   
+            </stylCls.CustStatusMain>
+            
+            <CommanModal 
+                showModal = {showModal}
+                hideModal = {hideModal}
+                addCustomer
+            /> 
         </div>
     )
   }

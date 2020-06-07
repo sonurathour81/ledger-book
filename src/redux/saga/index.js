@@ -58,10 +58,34 @@ export function* initialSignUpGen(data){
 
 }
 
+export function* initalUpdateuserProfile(data){
+    try{
+        const useRef = configDatabase.database().ref(`/login/${data.payload.key}`);
+        useRef.update(data.payload);
+        const temp = [{...data.payload}]
+        localStorage.setItem("LogedUser",JSON.stringify(temp));
+        yield put(fun.successUpdateUser(data))
+    }catch(error){
+        yield put(fun.errorUpdateUser(error))
+    }
+}
+
+export function* initalChangeUserPassword(data){
+    try{
+        const useRef = configDatabase.database().ref(`/login/${data.payload.key}`);
+        useRef.update(data.payload);
+        const temp = [{...data.payload}]
+        localStorage.setItem("LogedUser",JSON.stringify(temp));
+        yield put(fun.successChangePasswordUser(data))
+    }catch(error){
+        yield put(fun.errorChangePasswordUser(error))
+    }
+}
+
 export function* initialCustomerGen(data){
     try{
         let x = databaseCustomerData.push(data.payload);
-        const out = { [x.key]: { ...data.payload }}
+        const out = { [x.key]: { ...data.payload, "customerId": x.key }}
         yield put(fun.successCustomerAdd(out))
 
     }catch(error){
@@ -289,6 +313,8 @@ export function * watcherSaga(){
     yield takeEvery(act.GET_ITEMS_OF_CUSTOMER_INITIAL,getItemsOfCustomer);
     yield takeEvery(act.ADD_MONEY_OF_CUSTOMER_INITIAL,addMoneyofCustomer);
     yield takeEvery(act.GET_MONEY_OF_CUSTOMER_INITIAL,getMoneyofCustomer);
+    yield takeEvery(act.UPDATE_USER_PRFILE_INITIAL,initalUpdateuserProfile);
+    yield takeEvery(act.CHANGE_USER_PASSWORD_INITIAL,initalChangeUserPassword);
 }
 
 export default function * rootSaga(){

@@ -9,11 +9,11 @@ import TopBar from './topBar/index'
 import {NotFound} from './notFound/index'
 import { Home } from './home/index'
 import AddUser from './addUser/index';
-import UsersTable from './usersTable/index';
-import { UserAccount } from './userAccount/index'
-import { SelectedUserAccount } from './selectedUserAccount/index'
-const App = () => {
-
+import CustomersList from './customersList/index';
+import { CustomerAccount } from './customerAccount/index'
+import { SelectedCustomerAccount } from './selectedCustomerAccount/index'
+import { UserProfile } from './userProfile/index'
+const App = (props) => {
   const mapState = useSelector(state => state.userData);
   const dispatch = useDispatch();
 
@@ -29,7 +29,7 @@ const App = () => {
 
   return (
     <div className="App">
-      <ToastContainer autoClose={5000}/>
+      <ToastContainer autoClose={2000}/>
 
       <Router>
         <TopBar />
@@ -38,16 +38,14 @@ const App = () => {
             {
               getToken ? 
               <div>
-                <Route exact path="/" component={Home} />
-                <Route exact path="/addUser" component={AddUser} />
-                <Route exact path="/usersTable" component={UsersTable} />
-                <Route exact path="/userAccount" component={UserAccount} />
-                <Route exact path={`/userAccount/${clickedCustomer.customerId}`} component={SelectedUserAccount} />
+                <Route exact path="/" component={CustomersList} />
+                <Route exact path="/customerAccount" component={CustomerAccount} />
+                <Route exact path={`/customerAccount/${clickedCustomer.customerId}`} component={SelectedCustomerAccount} />
+                <Route exact path={`/userProfile`} component={UserProfile} />
               </div>
               :
               <div>
-                <Route exact path="/" component={Home} /> 
-                <Route exact path="/login" component={Login} />
+                <Route exact path="/" component={Login} /> 
                 <Route exact path="/signup" ><SignUp /></Route>
               </div>
             }

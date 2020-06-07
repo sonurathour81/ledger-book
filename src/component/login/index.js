@@ -7,6 +7,8 @@ import  { Redirect,Link } from 'react-router-dom'
 
 import * as fun from '../../redux/actions/index'
 import * as styl from '../../style'
+import * as stylCls from './style'
+
 
 const Login = (props) => {
 
@@ -71,30 +73,35 @@ const Login = (props) => {
           <styl.Header>
             SignIn
           </styl.Header>
-          <form class="ui form" >            
-            <Field
-              validator="isEmail"
-              required
-              label="Email"
-              name="email"
-              placeholder="Example@gmail.com"
-              onChange={handleChange}
-              value={data.email}
-              shouldValidateInputs={shouldValidateInputs}
-            />
-            <Field
-              type="password"
-              required
-              label="Password"
-              name="password"
-              placeholder="*********"
-              onChange={handleChange}
-              value={data.password}
-              shouldValidateInputs={shouldValidateInputs}
-            />
-            <styl.Button>
+          <form class="ui form" >
+            <stylCls.CustmFormField className="field">
+              <Field
+                validator="isEmail"
+                required
+                label="Email"
+                name="email"
+                placeholder="Example@gmail.com"
+                onChange={handleChange}
+                value={data.email}
+                shouldValidateInputs={shouldValidateInputs}
+              />
+            </stylCls.CustmFormField>
+            <stylCls.CustmFormField>
+              <Field
+                type="password"
+                required
+                label="Password"
+                name="password"
+                placeholder="*********"
+                onChange={handleChange}
+                value={data.password}
+                shouldValidateInputs={shouldValidateInputs}
+              />            
+            </stylCls.CustmFormField>
+
+            <stylCls.CustmButton>
               <button class="positive ui button" type="submit" onClick={handleSubmit} >Login</button>
-            </styl.Button>
+            </stylCls.CustmButton>
             <p className="clickableBtn">
               <Link to="/signup">Click here to SignUp!</Link>
             </p>

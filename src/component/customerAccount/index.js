@@ -7,7 +7,7 @@ import { CustomerHeader } from '../customerHeader';
 import { CustomerStatusbar } from '../customerStatusbar';
 
 
-export const UserAccount = () => {
+export const CustomerAccount = () => {
     const mapState = useSelector(state => state);
     const dispatch = useDispatch();
     

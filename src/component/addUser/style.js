@@ -1,4 +1,4 @@
-import styled, {css} from 'styled-components'
+import styled from 'styled-components'
 
 export const CustmFormField = styled.div`
     padding: 3px 12px!important;
@@ -14,7 +14,15 @@ export const CustmFormField = styled.div`
         font-size: 13px!important;
         color: #383838!important;
         border-radius: 0px!important;
-
+        height: 37px!important;
+    }
+    .form-group.has-feedback{
+        margin-bottom: 0px!important;
+    }
+    .form-group.has-feedback.has-error{
+        .help-block{
+            color: #e62323;
+        }
     }
 `
 
@@ -26,17 +34,4 @@ export const CustmButton = styled.div`
         font-size: 13px!important;
         border-radius: 0px!important;
     }
-`
-export const CustmHeader = styled.div`
-    .modal-header{
-        padding: 12px 22px!important;
-        color: #2b2b2b!important;
-        justify-content: center;
-        background: #f7f7f7;  
-    }
-`
-
-export const CustmModal = styled.div`
-    
-
 `

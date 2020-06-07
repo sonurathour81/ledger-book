@@ -10,7 +10,7 @@ export const ManForm = styled.div`
 export const ManFormSec =  styled.div`
   box-shadow: 0px 2px 16px 7px rgba(0,0,0,.1);
   padding: 25px;
-  width: 20%;
+  width: 23%;
 `
 
 export const Header = styled.div`

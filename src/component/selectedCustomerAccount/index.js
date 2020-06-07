@@ -4,7 +4,7 @@ import { AddPayTabs } from '../tabs/index'
 import { CustomerHeader } from '../customerHeader/index'
 import { CustomerStatusbar } from '../customerStatusbar'
 
-export const SelectedUserAccount = () => {
+export const SelectedCustomerAccount = (props) => {
 
     return(
         <div>

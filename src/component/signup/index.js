@@ -8,6 +8,8 @@ import  { Redirect,Link } from 'react-router-dom'
 import { Field, formInputData, formValidation } from 'reactjs-input-validator';
 
 import * as styl from '../../style'
+import * as stylCls from './style'
+
 import './style.css';
 import * as fun from '../../redux/actions/index'
 import Login from '../login';
@@ -25,11 +27,7 @@ const SignUp = (props) => {
 		setSignUpState({...signUpState})
 
 	}
-		
-	const [ dobDate, setDobDate ] = useState('')
-	const DobFun = date => {
-		setDobDate(date)
-	};
+	const [storeType, setStoreType] = useState('')
 
 	useEffect(()=>{
 		dispatch(fun.displayDataInitial())
@@ -45,15 +43,9 @@ const SignUp = (props) => {
 
 	const submitForm = (e) => {
 		e.preventDefault();
-		var months = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'agu', 'sep', 'oct', 'nov', 'dec'];
-		var day = dobDate.getDate();
-		var year = dobDate.getFullYear();
-		var month = months[dobDate.getMonth()];
-		const fullDate = `${day}/${month}/${year}`;
-
 		const isFormValid = formValidation(signUpState);
 		const inputValue = formInputData(signUpState)
-		const newObj = {...inputValue, "dateOfBirth": fullDate}
+		const newObj = {...inputValue, "storeType": storeType}
 		
 		if (isFormValid) {
 
@@ -86,100 +78,140 @@ const SignUp = (props) => {
 		}
 	}
 	
-
+	
 
 	const passwordValue = signUpState.password && signUpState.password.value;
     return(
       <styl.ManForm>
-        <styl.ManFormSec>
+        <styl.ManFormSec className="withIncres">
           <styl.Header>
-			  {props.check}
             SignUp
           </styl.Header>
           <form className="ui form" onSubmit={submitForm}>
-			<div>
-				<Field
-					validator="isAlphanumeric"
-					required
-					label="First Name"
-					name="first_name"
-					placeholder="First Name"
-					onChange={fieldHandle}
-					value={signUpState.first_name}
-					shouldValidateInputs={shouldValidateInputs}
-				/>
+			<div className="two fields">
+				<stylCls.CustmFormField className="field">
+					<Field
+						validator="isAlphanumeric"
+						required
+						label="First Name"
+						name="first_name"
+						placeholder="First Name"
+						onChange={fieldHandle}
+						value={signUpState.first_name}
+						shouldValidateInputs={shouldValidateInputs}
+					/>
+				</stylCls.CustmFormField>
+				<stylCls.CustmFormField className="field">
+					<Field
+						validator="isAlphanumeric"
+						required
+						label="Last Name"
+						name="last_name"
+						placeholder="Last Name"
+						onChange={fieldHandle}
+						value={signUpState.last_name}
+						shouldValidateInputs={shouldValidateInputs}
+					/>
+				</stylCls.CustmFormField>
 			</div>
-			<div>
-				<Field
-					validator="isAlphanumeric"
-					required
-					label="Last Name"
-					name="last_name"
-					placeholder="Last Name"
-					onChange={fieldHandle}
-					value={signUpState.last_name}
-					shouldValidateInputs={shouldValidateInputs}
-				/>
+			<div className="two fields">
+				<stylCls.CustmFormField className="field">
+					<Field
+						validator="isAlphanumeric"
+						required
+						label="Store Name"
+						name="store_name"
+						placeholder="Store Name"
+						onChange={fieldHandle}
+						value={signUpState.store_name}
+						shouldValidateInputs={shouldValidateInputs}
+					/>
+				</stylCls.CustmFormField>
+				<stylCls.CustmFormField className="field">
+					<label>Type of Store</label>
+					<select 
+						class="ui dropdown" 
+						required
+						name="store_type"
+						onChange={(e) => setStoreType(e.target.value)}
+						value={storeType}
+					>
+						<option value="">Select Type</option>
+						<option value="kirana">Kirana Store</option>
+						<option value="electronic">Electronic</option>
+						<option value="hotel">Hotel</option>
+						<option value="bicycle">Bicycle</option>
+					</select>
+				</stylCls.CustmFormField>             
 			</div>
-			<div>
-				<Field
-					validator="isEmail"
-					required
-					label="Email"
-					name="email"
-					placeholder="Example@gmail.com"
-					onChange={fieldHandle}
-					value={signUpState.email}
-					shouldValidateInputs={shouldValidateInputs}
-				/>
+			<div className="two fields">
+				<stylCls.CustmFormField className="field">
+					<Field
+						validator="isEmail"
+						required
+						label="Email"
+						name="email"
+						placeholder="Example@yopmail.com"
+						onChange={fieldHandle}
+						value={signUpState.email}
+						shouldValidateInputs={shouldValidateInputs}
+					/>
+				</stylCls.CustmFormField>
+				<stylCls.CustmFormField className="field">
+					<Field
+						maxLength={10}
+						minLength={10}
+						validator="isNumeric"
+						required
+						placeholder="Phone Number"
+						label="Phone Number"
+						name="phone"
+						onChange={fieldHandle}
+						value={signUpState.phone}
+						shouldValidateInputs={shouldValidateInputs}
+						minLengthErrMsg="Invalid Phone"
+					/>
+				</stylCls.CustmFormField>
+			</div>	
+			<div className="two fields">
+				<stylCls.CustmFormField className="field">
+					<Field
+						validator="isAlphanumeric" minLength={8}
+						minLengthErrMsg="Short passwords are easy to guess. Try one with atleast 8 characters"
+						required
+						type="password"
+						label="Password"
+						name="password"
+						placeholder="********"
+						onChange={fieldHandle}
+						value={signUpState.password}
+						shouldValidateInputs={shouldValidateInputs}
+					/>
+				</stylCls.CustmFormField>
+				<stylCls.CustmFormField className="field">
+					<Field
+						validator="equals"
+						comparison={passwordValue}
+						validatorErrMsg="These passwords don't match. Try again?"
+						required
+						type="password"
+						label="Confirm Password"
+						name="confirm_password"
+						placeholder="********"
+						onChange={fieldHandle}
+						value={signUpState.confirm_password}
+						shouldValidateInputs={shouldValidateInputs}
+					/>
+				</stylCls.CustmFormField>
 			</div>
-			<div className="field datefield">
-				<label>Date of Birth</label>
-				<DatePicker
-					required
-					selected= { dobDate }
-					onChange={ DobFun }
-					placeholderText = "mm/dd/yyyy"
-					dateFormat = "MM/dd/yyyy"
-				/>
-			</div>
-			<div>
-				<Field
-					validator="isAlphanumeric" minLength={8}
-					minLengthErrMsg="Short passwords are easy to guess. Try one with atleast 8 characters"
-					required
-					type="password"
-					label="Password"
-					name="password"
-					placeholder="********"
-					onChange={fieldHandle}
-					value={signUpState.password}
-					shouldValidateInputs={shouldValidateInputs}
-				/>
-			</div>
-			<div>
-				<Field
-					validator="equals"
-					comparison={passwordValue}
-					validatorErrMsg="These passwords don't match. Try again?"
-					required
-					type="password"
-					label="Confirm Password"
-					name="confirm_password"
-					placeholder="********"
-					onChange={fieldHandle}
-					value={signUpState.confirm_password}
-					shouldValidateInputs={shouldValidateInputs}
-				/>
-			</div>
-			<styl.Button>
+			<stylCls.CustmButton>
 				<button 
 					className="positive ui button" 
 					type="submit"
 				>
 					SignUp
 				</button>
-			</styl.Button>
+			</stylCls.CustmButton>
 			<p className="clickableBtn">
 				<Link to="/login">Click here to SignIn!</Link>
 			</p>

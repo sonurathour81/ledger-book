@@ -9,8 +9,8 @@ export const CustomerHeader = (props) => {
         setClickedUserData(JSON.parse(localStorage.getItem("Clicked_User_Data")) || [])
     }, [])
 
-    const deleteGrandTotal = () => {
-        return localStorage.removeItem("grandToal")
+    const deleteClickedUserData = () => {
+        return localStorage.removeItem("Clicked_User_Data")
     }
 
     return(
@@ -22,7 +22,7 @@ export const CustomerHeader = (props) => {
                         {
                             props.customerHistory &&
                             <div>
-                                <Link to='/userAccount' onClick={deleteGrandTotal}>
+                                <Link to='/customerAccount'>
                                     <i class="plus square outline icon"></i> Add More Items / Pay
                                 </Link>
                             </div>
@@ -30,7 +30,7 @@ export const CustomerHeader = (props) => {
                         {
                             props.customerAddPay &&
                             <div>
-                                <Link to='/usersTable'>
+                                <Link to='/customersList' onClick={deleteClickedUserData}>
                                     <i class="angle double left icon"></i> Back
                                 </Link>
                             </div>
@@ -50,7 +50,7 @@ export const CustomerHeader = (props) => {
                         {
                             props.customerAddPay && 
                             <div>
-                                <Link to={`/userAccount/${clickedUserData.customerId}`}>
+                                <Link to={`/customerAccount/${clickedUserData.customerId}`}>
                                     <i class="folder open outline icon"></i> History
                                 </Link>
                             </div>

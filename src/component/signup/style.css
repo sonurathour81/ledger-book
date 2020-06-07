@@ -16,3 +16,15 @@
     text-decoration: none;
     opacity: 0.7;
 }
+
+.form-group.has-feedback{
+    margin: 0px;
+}
+
+.form-group.has-feedback.has-error .help-block{
+    color: #db2828;
+}
+
+.withIncres{
+    width: 50%!important;
+}

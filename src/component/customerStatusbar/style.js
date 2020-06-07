@@ -44,15 +44,15 @@ export const FinallyRes = styled.div`
     color: #565656;
     span{
         ${({settled}) => settled && css`
-            color: #25cab4;
+            color: #25cab4!important;
         `}
 
         ${({youget}) => youget && css`
-            color: #e62323;
+            color: #e62323!important;
         `}
 
         ${({yougive}) => yougive && css`
-            color: #21ba45;
+            color: #21ba45!important;
         `}
     }
 
@@ -65,7 +65,8 @@ export const SrchMain =  styled.div`
 
     div:nth-child(1){
         color: #565656;
-        span{
+        cursor: pointer;
+        i{
             color: #21ba45;
         }
     }
@@ -73,7 +74,7 @@ export const SrchMain =  styled.div`
     div:nth-child(2){
         color: #565656;
         span{
-            color: #e62323;
+            color: #fbbd08;
         }
     }
 

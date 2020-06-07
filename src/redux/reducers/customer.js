@@ -14,6 +14,9 @@ export default (state= initial, action) => {
             
         case act.ADD_CUSTOMER_ERROR:
             return{...state, error: action.payload };
+
+        case act.ADD_CUSTOMER_SUCCESS_STATUS:
+            return{...state, addCustomerStatus: action.payload}
         
         case act.DISPLAY_CUSTOMER_DATA_INITIAL:
             return {...state};

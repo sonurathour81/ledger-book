@@ -1,7 +1,7 @@
 import React,{useEffect, useState} from 'react'
 import { useSelector, useDispatch } from 'react-redux';
-import { Route, Link, BrowserRouter as Router, Switch, Redirect } from 'react-router-dom'
-import styled,{css} from 'styled-components'
+import { Link } from 'react-router-dom'
+import styled from 'styled-components'
 import * as fun from '../../redux/actions/index'
 
 
@@ -29,12 +29,38 @@ const TopbarMain = styled.div`
         list-style: none;
         padding: 10px;
         margin-bottom: 0px;
-        li.logout{
+        li.rightside {
+            padding: 7px 0px;
+            padding-right: 15px;
+            i{
+                align-items: center;
+                justify-content: center;
+                display: flex;
+                padding-right: 10px;
+                cursor: pointer;
+                color: #808080;
+            }
+            i.up{
+                align-items: end;
+            }
+        }
+        li.rightsideImg{
+            padding: 2px 0px;
+            div{
+                height: 37px;
+                width: 37px;
+                border-radius: 20px;
+                font-size: 16px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                color: white;
+            }
+        }
+        li.rightsideuser{
             color: #4e4e4e;
             cursor: pointer;
-            &:hover{
-                color: #868686;
-            }
+            text-transform: capitalize;
         }
         li{
             padding: 7px 20px;
@@ -51,46 +77,87 @@ const TopbarMain = styled.div`
     }
 `
 
-
+const HideShowDiv = styled.div`
+    position: absolute;
+    right: 20px;
+    bottom: -107px;
+    box-shadow: 0px 5px 15px 4px rgba(0,0,0,.1);
+    background: white;
+    padding: 7px 0px;
+    transition-timing-function: ease-in-out;
+    div{
+        padding: 10px 15px;
+        width: 150px;
+        font-size: 16px;
+        color: #4e4e4e;
+        cursor: pointer;
+        &:hover{
+            color: #21ba45;
+        }
+    }
+    div a{
+        color: #4e4e4e;
+        &:hover{
+            color: #21ba45;
+            text-decoration: none!important;
+        }
+    }
+`
+const ImgDiv= styled.div`
+    background: ${props => props.clor && props.clor};
+`
 const TopBar = (props) => {
-
     const mapState = useSelector(state => state.userData);
     const dispatch = useDispatch();
 
     const [getToken, setGetToken] = useState('')
-
-    const logOutFun = () => {
-        localStorage.removeItem("LogedUser");
-        localStorage.removeItem("Token");
-        dispatch(fun.tokenLogin({"Token": false}))
-        window.location.reload();
-        return props.history.push('/');
-        // return <Redirect path="/addUser" to="/" />
+    const [logInUser, setloginUser] = useState('')
+    const [hideShow, setHideShow] = useState(false)
+    
+    const showHideFun = () => {
+        setHideShow(!hideShow)
     }
 
+    const logout = (e) => {        
+        localStorage.removeItem("LogedUser");
+        localStorage.removeItem("Token");
+        localStorage.removeItem("imageColor");
+        dispatch(fun.tokenLogin({"Token": false}))
+        setHideShow(false)
+        window.location.reload();
+        return props.history.push('/');
+    }
+
+
+    const [clor, setClor] = useState('')
     useEffect(()=>{
         const getToken = localStorage.getItem("Token") || '';
         setGetToken(getToken)
+        setloginUser(...JSON.parse(localStorage.getItem("LogedUser")) || '')
+        setClor(localStorage.getItem("imageColor") || '#21ba45')
       }, [mapState])
 
-
+      
+      const first_last =  logInUser && (logInUser.first_name.charAt(0).toUpperCase() + logInUser.last_name.charAt(0).toUpperCase());
     return(
         <TopbarMain>
             <ul>
-                <li><Link to="/">Home</Link></li>
                 {
                     getToken &&
                         <React.Fragment>
-                            <li><Link to="/addUser">Add User</Link></li>
-                            <li><Link to="/usersTable">Users</Link></li>
+                            <li><Link to="/">Customers</Link></li>
                         </React.Fragment>
                 }
             </ul>
             <ul>
                 {
                     getToken && 
-                        <React.Fragment>                            
-                            <li className="logout" onClick={logOutFun}>Logout</li>
+                        <React.Fragment>
+                            <li className="rightside">
+                                <i className= {`sort ${hideShow ? "up" : "down"} icon`} onClick={showHideFun}></i>    
+                            </li>                         
+                            <li className="rightsideuser" onClick={showHideFun}><div>{logInUser.first_name} {logInUser.last_name}</div></li>
+                            <li className="rightsideImg"><ImgDiv clor = {clor}>{first_last}</ImgDiv></li>
                         </React.Fragment>
                 }
                 {
@@ -100,11 +167,20 @@ const TopBar = (props) => {
                                 <Link to="/signup">SignUp</Link>
                             </li>
                             <li>
-                                <Link to="/login">SignIn</Link>
+                                <Link to="/">SignIn</Link>
                             </li>
                         </React.Fragment>
                 }
             </ul>
+
+            {
+                hideShow &&
+                    <HideShowDiv>
+                        <div className="profileLink"><Link to="/userProfile" onClick={() => setHideShow(false)}> <i className="user circle outline icon"></i> Profile </Link></div>
+                        <div onClick={logout}> <i className="power off icon"></i> Logout</div>
+                    </HideShowDiv>
+            }
+
         </TopbarMain>
     )
 }

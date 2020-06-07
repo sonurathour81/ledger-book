@@ -5,10 +5,10 @@ import _ from 'lodash';
 
 import { Field, formInputData, formValidation } from 'reactjs-input-validator';
 
-import * as styl from '../../style'
-import './style.css';
 import * as fun from '../../redux/actions/index'
 import { ConfirmationModal } from '../confirmationModal';
+import { CustmFormField, CustmButton } from './style'
+import { toast } from 'react-toastify';
 
 
 const AddUser = (props) => {
@@ -40,25 +40,22 @@ const AddUser = (props) => {
     }, [logedId])
     
 
-    const [showModal,setShowModal] = useState(false)
-    const [text, setText] = useState('')
-
     const confirmOpen = (status) => {
-        setShowModal(true)
         if(status === "email_phone"){
-            setText('This user are registred already! Please use another Email Id and Phone Number!')
-        }else if(status === "email"){
-            setText('This Email Id is registred already! Please use another Email Id!')
-        }else if(status === 'phone'){
-            setText('This Phone Number is registred already! Please use another Phone Number!')
-        }else if(status === 'success'){
-            setText(`User Added Successfully! You can go on user's list`)
+            alert('This user are registred already! Please use another Email Id and Phone Number!')
+        }
+        if(status === "email"){
+            alert('This Email Id is registred already! Please use another Email Id!')
+        }
+        if(status === 'phone'){
+            alert('This Phone Number is registred already! Please use another Phone Number!')
+        }
+        if(status === 'success'){
+            toast.success(`User Added Successfully!`)
+            dispatch(fun.successAddCustomerStatus(Date.now()))
         }
     }
-	
-    const hideModal = () => {
-        setShowModal(false)
-    }
+
 
     const submitForm = (e) => {
         e.preventDefault();
@@ -102,107 +99,101 @@ const AddUser = (props) => {
 
     return(
       <div>
-        <styl.ManForm>
-            <styl.ManFormSec>
-                <styl.Header>
+        <form className="ui form" onSubmit={submitForm}>
+            <div className="two fields">
+                <CustmFormField className="field">
+                    <Field
+                        validator="isAlpha"
+                        required
+                        label="Customer Name"
+                        name="cust_name"
+                        placeholder="Customer Name"
+                        onChange={fieldHandle}
+                        value={customerState.cust_name}
+                        shouldValidateInputs={shouldValidateInputs}
+                    />
+                </CustmFormField>
+                <CustmFormField className="field">
+                    <Field
+                        validator="isEmail"
+                        required
+                        label="Customer Email"
+                        name="cust_email"
+                        placeholder="Example@gmail.com"
+                        onChange={fieldHandle}
+                        value={customerState.cust_email}
+                        shouldValidateInputs={shouldValidateInputs}
+                    />
+                </CustmFormField>
+            </div>
+            <div className="two fields">
+                <CustmFormField className="field">
+                    <Field
+                        validator="isNumeric"
+                        maxLength={10}
+                        minLength={10}
+                        required
+                        label="Customer Phone"
+                        name="cust_phone"
+                        placeholder="Customer Phone"
+                        onChange={fieldHandle}
+                        value={customerState.cust_phone}
+                        shouldValidateInputs={shouldValidateInputs}
+                    />
+                </CustmFormField>
+                <CustmFormField className="field">
+                    <Field
+                        validator="isAlpha"
+                        requiredErrMsg="Enter your city"
+                        required
+                        label="Customer City"
+                        name="cust_city"
+                        placeholder="Customer City"
+                        onChange={fieldHandle}
+                        value={customerState.cust_city}
+                        shouldValidateInputs={shouldValidateInputs}
+                    />
+                </CustmFormField>
+            </div>
+            <div className="two fields">
+                <CustmFormField className="field">
+                    <Field
+                        validator="isAlphanumeric"
+                        requiredErrMsg="Enter your street"
+                        required
+                        label="Customer Street"
+                        name="cust_street"
+                        placeholder="Customer Street"
+                        onChange={fieldHandle}
+                        value={customerState.cust_street}
+                        shouldValidateInputs={shouldValidateInputs}
+                    />
+                </CustmFormField>
+                <CustmFormField className="field">
+                    <Field
+                        validator="isNumeric"
+                        maxLength={6}
+                        minLength={6}
+                        required
+                        label="Customer Zip Code"
+                        name="cust_zip"
+                        placeholder="Customer Zip Code"
+                        onChange={fieldHandle}
+                        value={customerState.cust_zip}
+                        shouldValidateInputs={shouldValidateInputs}
+                    />
+                </CustmFormField>
+            </div>
+            <CustmButton>
+                <button 
+                    className="positive ui button" 
+                    type="submit"
+                    disabled = {!formValidation(customerState) && 'disabled'}
+                >
                     Add Customer
-                </styl.Header>
-                <form className="ui form" onSubmit={submitForm}>
-                    <div>
-                        <Field
-                            validator="isAlpha"
-                            required
-                            label="Customer Name"
-                            name="cust_name"
-                            placeholder="Customer Name"
-                            onChange={fieldHandle}
-                            value={customerState.cust_name}
-                            shouldValidateInputs={shouldValidateInputs}
-                        />
-                    </div>
-                    <div>
-                        <Field
-                            validator="isEmail"
-                            required
-                            label="Customer Email"
-                            name="cust_email"
-                            placeholder="Example@gmail.com"
-                            onChange={fieldHandle}
-                            value={customerState.cust_email}
-                            shouldValidateInputs={shouldValidateInputs}
-                        />
-                    </div>
-                    <div>
-                        <Field
-                            validator="isNumeric"
-                            maxLength={10}
-                            minLength={10}
-                            required
-                            label="Customer Phone"
-                            name="cust_phone"
-                            placeholder="Customer Phone"
-                            onChange={fieldHandle}
-                            value={customerState.cust_phone}
-                            shouldValidateInputs={shouldValidateInputs}
-                        />
-                    </div>
-                    <div>
-                        <Field
-                            validator="isAlpha"
-                            requiredErrMsg="Enter your city"
-                            required
-                            label="Customer City"
-                            name="cust_city"
-                            placeholder="Customer City"
-                            onChange={fieldHandle}
-                            value={customerState.cust_city}
-                            shouldValidateInputs={shouldValidateInputs}
-                        />
-                    </div>
-                    <div>
-                        <Field
-                            validator="isAlphanumeric"
-                            requiredErrMsg="Enter your street"
-                            required
-                            label="Customer Street"
-                            name="cust_street"
-                            placeholder="Customer Street"
-                            onChange={fieldHandle}
-                            value={customerState.cust_street}
-                            shouldValidateInputs={shouldValidateInputs}
-                        />
-                    </div>
-                    <div>
-                        <Field
-                            validator="isNumeric"
-                            maxLength={6}
-                            minLength={6}
-                            required
-                            label="Customer Zip Code"
-                            name="cust_zip"
-                            placeholder="Customer Zip Code"
-                            onChange={fieldHandle}
-                            value={customerState.cust_zip}
-                            shouldValidateInputs={shouldValidateInputs}
-                        />
-                    </div>
-                    <styl.Button>
-                        <button 
-                            className="positive ui button" 
-                            type="submit"
-                            disabled = {!formValidation(customerState) && 'disabled'}
-                        >
-                            Add Customer
-                        </button>
-                    </styl.Button>
-                </form>
-            </styl.ManFormSec>
-        </styl.ManForm>
-        <ConfirmationModal 
-            showModal = {showModal}
-            hideModal = {hideModal}
-            text = {text}
-        />
+                </button>
+            </CustmButton>
+        </form>
       </div>
     )
 }

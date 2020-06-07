@@ -1,5 +1,4 @@
 import React,{useState, useEffect} from 'react';
-import { Field,Textarea, formInputData, formValidation } from 'reactjs-input-validator';
 import { useSelector, useDispatch } from 'react-redux';
 import _ from 'lodash'
 
@@ -11,6 +10,7 @@ import * as fun from '../../redux/actions/index'
 import "./style.css"
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import AddUser from '../addUser/index'
 
 export const CommanModal = (props) =>{
     
@@ -67,19 +67,27 @@ export const CommanModal = (props) =>{
             }
         }
     }
+    
+    useEffect(()=>{
+        props.hideModal()
+    },[mapState.customerData.addCustomerStatus])
 
     return(
         <div>
             <CustmModal>
-                <Modal show={props.showModal} onHide={props.hideModal}>
+                <Modal 
+                    show={props.showModal}
+                    onHide={props.hideModal}
+                    size="lg"
+                >
                     <CustmHeader>
                         <Modal.Header>
-                            <Modal.Title>Update User</Modal.Title>
+                            <Modal.Title>{props.addCustomer ? 'Add Customer' : 'Update Customer'}</Modal.Title>
                         </Modal.Header>
                     </CustmHeader>
                     <Modal.Body>
                         <div>
-                            <form className="ui form" onSubmit={submitUpdate}>
+                            { props.updateCustomer && <form className="ui form" onSubmit={submitUpdate}>
                                 <div className="two fields">
                                     <CustmFormField className="field">
                                         <label>Customer Name</label>
@@ -161,7 +169,8 @@ export const CommanModal = (props) =>{
                                         Update Customer
                                     </button>
                                 </CustmButton>
-                            </form>
+                            </form>}
+                            {props.addCustomer && <AddUser />}
                         </div>
                     </Modal.Body>
                 </Modal>

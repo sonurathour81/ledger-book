@@ -5,11 +5,11 @@ export const MainUserHeader = styled.div`
     justify-content: space-between;
     padding: 12px 20px;
     font-size: 18px;
-    color: #ffffff;
-    border-bottom: 2px solid #21ba45;
-    background: #21ba45;
+    color: #21ba45;
+    border-bottom: 2px solid #f5f5f5;
+    background: #f5f5f5;
     a{
         text-decoration: none;
-        color: white;
+        color: #21ba45;
     }
 `

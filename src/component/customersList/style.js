@@ -33,7 +33,7 @@ export const MainUsersTable = styled.div`
     }
     
     .fullTr:hover{
-        cursor: pointer;
+        /* cursor: pointer; */
         background: #f9fafb;
         z-index: -1;
     }

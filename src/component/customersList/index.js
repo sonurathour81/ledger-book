@@ -11,7 +11,7 @@ import * as fun from '../../redux/actions/index'
 import { CustomerStatusbar } from '../customerStatusbar'
 
 
-const UsersTable = (props) => {
+const CustomersList = (props) => {
 
     const mapState = useSelector(state => state);
     const dispatch = useDispatch();
@@ -105,7 +105,7 @@ const UsersTable = (props) => {
                                                         <i class="edit outline icon"></i> Edit
                                                     </div>
                                                     <div onClick={(e)=>sendData(e,val)}>
-                                                        <Link to="/userAccount">
+                                                        <Link to="/customerAccount">
                                                             <i class="folder alternate outline icon"></i> Ledger
                                                         </Link>
                                                     </div>
@@ -127,6 +127,7 @@ const UsersTable = (props) => {
                     <CommanModal
                         showModal = {showModal}
                         hideModal = {hideModal}
+                        updateCustomer
                     />
                 </div>
             </stylCls.MainUsersTable>
@@ -134,4 +135,4 @@ const UsersTable = (props) => {
     )
 }
 
-export default UsersTable;
+export default CustomersList;

@@ -21,6 +21,51 @@ export const errorSignUp = (data) => {
     }
 }
 
+export const initialUpdateUser = (data) => {
+    return{
+        type : act.UPDATE_USER_PRFILE_INITIAL,
+        payload: {...data}
+    }
+}
+
+export const successUpdateUser = (data) => {
+    return{
+        type : act.UPDATE_USER_PRFILE_SUCCESS,
+        payload: {...data}
+    }
+}
+
+export const errorUpdateUser = (data) => {
+    return{
+        type : act.UPDATE_USER_PRFILE_ERROR,
+        payload: data
+    }
+}
+
+
+export const initialChangePasswordUser = (data) => {
+    return{
+        type : act.CHANGE_USER_PASSWORD_INITIAL,
+        payload: {...data}
+    }
+}
+
+export const successChangePasswordUser = (data) => {
+    return{
+        type : act.CHANGE_USER_PASSWORD_SUCCESS,
+        payload: {...data}
+    }
+}
+
+export const errorChangePasswordUser = (data) => {
+    return{
+        type : act.CHANGE_USER_PASSWORD_ERROR,
+        payload: data
+    }
+}
+
+
+
 export const displayDataInitial = (data) => {
     return{
         type : act.ON_FORM_DISPLAY_INITIAL,
@@ -69,6 +114,13 @@ export const successCustomerAdd = (data) => {
     return{
         type : act.ADD_CUSTOMER_SUCCESS,
         payload: {...data}
+    }
+}
+
+export const successAddCustomerStatus = (data) => {
+    return{
+        type: act.ADD_CUSTOMER_SUCCESS_STATUS,
+        payload: data
     }
 }
 
@@ -256,6 +308,14 @@ export const getMoneyError = (data) => {
 export const searchText = (data) => {
     return{
         type: act.SEARCH_TEXT,
+        payload: data
+    }
+}
+
+
+export const changePasswordStatus = (data) => {
+    return{
+        type: act.CHNAGE_PASSWORD_STATUS,
         payload: data
     }
 }
